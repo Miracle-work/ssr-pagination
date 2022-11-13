@@ -3,11 +3,15 @@ import Link from "next/link"
 import Pagination from 'react-bootstrap/Pagination';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useState } from "react";
-import axios from "../lib/axios"
+
+
+const getUsers=async()=>{
+  const users= await userId(3)
+  return users
+}
 
 export const getServerSideProps=async(context)=> {
-
-  const users= await userId()
+  const users= await getUsers()
    return {
     props:{
       users:users,
@@ -16,12 +20,13 @@ export const getServerSideProps=async(context)=> {
 }
 
 export default function Home({users}) {
-  
   const [pageId,setPageId]=useState()
+  // start click
   const handleClick=(page)=>{
     setPageId(page)
   }
-  
+  // end click
+  // start pagination
   let active=1
   let items = [];
   for (let number = 1; number <= users.last_page; number++) {
@@ -31,6 +36,7 @@ export default function Home({users}) {
       </Pagination.Item>,
     );
   }
+  // end pagination
   return (
     <div>
       {

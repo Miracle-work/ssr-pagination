@@ -1,7 +1,7 @@
 import axios from "../../lib/axios"
 
-export default async function() {
-    const response= await axios.get(`/v1/users?page=2`)
+export default async function(id) {
+    const response= await axios.get(`/v1/users?page=${id}`)
     const data=response.data
     return data;
 }
